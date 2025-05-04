@@ -116,7 +116,7 @@ Hello {user_mention}! I'm your secure file sharing assistant.
 • Real-time Tracking
 
 📢 Join @BotVerseRavi for updates!
-👨‍💻 Contact @Unknown_RK01 for support
+👨‍💻 Contact @Jaintaniya02 for support
 
 Use /help to see available commands!
 """
@@ -145,7 +145,7 @@ Use /help to see available commands!
 • `/batch` - Group multiple files into one link.  
 • Forward files & reply with `/batch`.  
 
-⚠️ **Need Help?** Contact [@Unknown_RK01](https://t.me/Unknown_RK01)  
+⚠️ **Need Help?** Contact [@Jaintaniya02](https://t.me/Jaintaniya02)  
 """
 
     ABOUT_TEXT = """
@@ -156,8 +156,8 @@ Use /help to see available commands!
 **Language:** Python
 **Framework:** Pyrogram
 
-📢 **Updates:** @BotVerseRavi
-🛠 **Support:** @Unknown_RK01
+📢 **Updates:** @Jaintaniya02
+🛠 **Support:** @alphabotzchat
 
 **Features:**
 • Secure File Sharing
@@ -168,7 +168,7 @@ Use /help to see available commands!
 • Automatic File Type Detection
 
 
-Made with ❤️ by @Unknown_RK01
+Made with ❤️ by @Jaintaniya02
 """
 
     FILE_TEXT = """
@@ -188,8 +188,7 @@ Made with ❤️ by @Unknown_RK01
     FORCE_SUB_TEXT = """
 ⚠️ **Access Restricted!**
 
-Please join our channel to use this bot:
-Bot By @BotVerseRavi
+Please join our channel to use this bot!
 
 Click button below, then try again!
 """
