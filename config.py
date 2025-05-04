@@ -115,7 +115,7 @@ Hello {user_mention}! I'm your secure file sharing assistant.
 • Multiple File Types Support
 • Real-time Tracking
 
-📢 Join @BotVerseRavi for updates!
+📢 Join @TheAlphaBotz for updates!
 👨‍💻 Contact @Jaintaniya02 for support
 
 Use /help to see available commands!
@@ -136,11 +136,6 @@ Use /help to see available commands!
 • `/broadcast` - Send a message to all users  
 • `/auto_del` - Set auto-delete timer  
 
-
-🗑 **Auto-Delete System:**  
-• Files auto-delete after a set time.  
-• Modify timer using `/auto_del`.  
-
 🔗 **Batch System:**  
 • `/batch` - Group multiple files into one link.  
 • Forward files & reply with `/batch`.  
@@ -152,7 +147,7 @@ Use /help to see available commands!
 ℹ️ **About {bot_name}**
 
 **Version:** `{version}`
-**Developer:** @Unknown_RK01
+**Owner:** @Jaintaniya02
 **Language:** Python
 **Framework:** Pyrogram
 
