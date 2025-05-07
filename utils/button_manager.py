@@ -102,7 +102,7 @@ class ButtonManager:
                 ])
                 
         buttons.append([
-            InlineKeyboardButton("Developer 👨‍💻", url=config.DEVELOPER_LINK)
+            InlineKeyboardButton("❄️Owner❄️", url=config.DEVELOPER_LINK)
         ])
         
         return InlineKeyboardMarkup(buttons)
