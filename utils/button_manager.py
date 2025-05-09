@@ -78,7 +78,7 @@ class ButtonManager:
         if config.FORCE_SUB_CHANNEL != 0 and config.CHANNEL_LINK:
             buttons.append([
                 InlineKeyboardButton(
-                    "Join Channel 1 🔔",
+                    "Join Channel 🔔",
                     url=config.CHANNEL_LINK
                 )
             ])
@@ -86,7 +86,7 @@ class ButtonManager:
         if config.FORCE_SUB_CHANNEL_2 != 0 and config.CHANNEL_LINK_2:
             buttons.append([
                 InlineKeyboardButton(
-                    "Join Channel 2 🔔",
+                    "Join Channel 🔔",
                     url=config.CHANNEL_LINK_2
                 )
             ])
@@ -94,7 +94,7 @@ class ButtonManager:
         if config.FORCE_SUB_CHANNEL_3 != 0 and config.CHANNEL_LINK_3:
             buttons.append([
                 InlineKeyboardButton(
-                    "Join Channel 3 🔔",
+                    "Join Channel 🔔",
                     url=config.CHANNEL_LINK_3
                 )
             ])
@@ -102,7 +102,7 @@ class ButtonManager:
         if config.FORCE_SUB_CHANNEL_4 != 0 and config.CHANNEL_LINK_4:
             buttons.append([
                 InlineKeyboardButton(
-                    "Join Channel 4 🔔",
+                    "Join Channel 🔔",
                     url=config.CHANNEL_LINK_4
                 )
             ])
@@ -128,8 +128,8 @@ class ButtonManager:
         if config.CHANNEL_LINK:
             if config.CHANNEL_LINK_2:
                 buttons.append([
-                    InlineKeyboardButton("Channel 1 📢", url=config.CHANNEL_LINK),
-                    InlineKeyboardButton("Channel 2 📢", url=config.CHANNEL_LINK_2)
+                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK),
+                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK_2)
                 ])
             else:
                 buttons.append([
