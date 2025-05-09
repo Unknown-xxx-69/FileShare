@@ -61,7 +61,7 @@ async def broadcast_command(client, message: Message):
                 "**Usage:** `/bcast Hello [interval] [pin]`\n"
                 "**Example:** `/bcast Hello 4h pin` = send every 4 hours and pin the message\n"
                 "Or reply to a media/text with `/bcast`\n"
-                "[Generate buttons](https://alphasharebtngen.netlify.app)"
+                "[Generate buttons](https://t.me/Unknown_RK01)"
             )
         content = message.text.split(None, 1)[1]
         words = content.strip().split()
