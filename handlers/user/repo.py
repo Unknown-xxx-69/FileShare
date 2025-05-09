@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
-@Client.on_message(filters.command("repo"))
+@Client.on_message(filters.command("grorhoegeodveogekehdoehdoevd93739"))
 async def repo_command(client: Client, message: Message):
     text = (
         "**🚀 AlphaShare - Open Source File Sharing Bot**\n\n"
