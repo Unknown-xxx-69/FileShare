@@ -86,7 +86,7 @@ class ButtonManager:
         if config.FORCE_SUB_CHANNEL_2 != 0 and config.CHANNEL_LINK_2:
             buttons.append([
                 InlineKeyboardButton(
-                    "Join Channel 🔔",
+                    "Join Group 🔔",
                     url=config.CHANNEL_LINK_2
                 )
             ])
@@ -129,11 +129,11 @@ class ButtonManager:
             if config.CHANNEL_LINK_2:
                 buttons.append([
                     InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK),
-                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK_2)
+                    InlineKeyboardButton("Support 🆘", url=config.CHANNEL_LINK_2)
                 ])
             else:
                 buttons.append([
-                    InlineKeyboardButton("Channel 📢", url=config.CHANNEL_LINK)
+                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK)
                 ])
                 
         buttons.append([
@@ -153,12 +153,12 @@ class ButtonManager:
         if config.CHANNEL_LINK:
             if config.CHANNEL_LINK_2:
                 buttons.append([
-                    InlineKeyboardButton("Channel 1 📢", url=config.CHANNEL_LINK),
-                    InlineKeyboardButton("Channel 2 📢", url=config.CHANNEL_LINK_2)
+                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK),
+                    InlineKeyboardButton("Support 🆘", url=config.CHANNEL_LINK_2)
                 ])
             else:
                 buttons.append([
-                    InlineKeyboardButton("Channel 📢", url=config.CHANNEL_LINK)
+                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK)
                 ])
         
         return InlineKeyboardMarkup(buttons)
@@ -174,12 +174,12 @@ class ButtonManager:
         if config.CHANNEL_LINK:
             if config.CHANNEL_LINK_2:
                 buttons.append([
-                    InlineKeyboardButton("Channel 1 📢", url=config.CHANNEL_LINK),
-                    InlineKeyboardButton("Channel 2 📢", url=config.CHANNEL_LINK_2)
+                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK),
+                    InlineKeyboardButton("Support 🆘", url=config.CHANNEL_LINK_2)
                 ])
             else:
                 buttons.append([
-                    InlineKeyboardButton("Channel 📢", url=config.CHANNEL_LINK)
+                    InlineKeyboardButton("Uodates 📢", url=config.CHANNEL_LINK)
                 ])
         
         return InlineKeyboardMarkup(buttons)
@@ -195,12 +195,12 @@ class ButtonManager:
         if config.CHANNEL_LINK:
             if config.CHANNEL_LINK_2:
                 buttons.append([
-                    InlineKeyboardButton("Channel 1 📢", url=config.CHANNEL_LINK),
-                    InlineKeyboardButton("Channel 2 📢", url=config.CHANNEL_LINK_2)
+                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK),
+                    InlineKeyboardButton("Support 🆘", url=config.CHANNEL_LINK_2)
                 ])
             else:
                 buttons.append([
-                    InlineKeyboardButton("Channel 📢", url=config.CHANNEL_LINK)
+                    InlineKeyboardButton("Upates 📢", url=config.CHANNEL_LINK)
                 ])
         
         return InlineKeyboardMarkup(buttons)
@@ -216,12 +216,12 @@ class ButtonManager:
         if config.CHANNEL_LINK:
             if config.CHANNEL_LINK_2:
                 buttons.append([
-                    InlineKeyboardButton("Channel 1 📢", url=config.CHANNEL_LINK),
-                    InlineKeyboardButton("Channel 2 📢", url=config.CHANNEL_LINK_2)
+                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK),
+                    InlineKeyboardButton("Support 🆘", url=config.CHANNEL_LINK_2)
                 ])
             else:
                 buttons.append([
-                    InlineKeyboardButton("Channel 📢", url=config.CHANNEL_LINK)
+                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK)
                 ])
         
         return InlineKeyboardMarkup(buttons)
