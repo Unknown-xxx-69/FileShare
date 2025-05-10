@@ -135,13 +135,12 @@ Use /help to see available commands!
 • `/start` - Start the bot  
 • `/help` - Show this menu  
 • `/about` - Bot details  
-• `/short [url]` - Shorten a link (e.g., `/short example.com`)  
-/repo 
+• `/short [url]` - Shorten a link (e.g., `/short example.com`)
 
 👑 **Admin Commands:**  
 • `/upload` - Upload a file (reply to a file)  
 • `/stats` - View bot statistics  
-• `/broadcast` - Send a message to all users  
+• `/bcast` - Send a message to all users  
 • `/auto_del` - Set auto-delete timer  
 
 
