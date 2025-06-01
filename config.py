@@ -10,7 +10,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 API_ID = int(os.getenv("API_ID"))
 API_HASH = os.getenv("API_HASH")
 
-OWNER_ID = int(os.getenv("OWNER_ID", 7355202884))
+OWNER_ID = int(os.getenv("OWNER_ID", 7500269454))
 
 # Database Configuration
 MONGO_URI = os.getenv("MONGO_URI")
