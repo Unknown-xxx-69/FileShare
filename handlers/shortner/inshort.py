@@ -1,27 +1,30 @@
 from pyrogram import Client, filters
-import requests
+from pyrogram.types import Message
+import httpx
 import asyncio
-from rich.console import Console
-import config  # Ensure LS_API_KEY and ADMIN_IDS are defined in config.py
+import logging
+import re
+import config  # Ensure LS_API_KEY and ADMIN_IDS are defined
 
-console = Console()
+logger = logging.getLogger(__name__)
 
-# Validate config
-if not hasattr(config, 'LS_API_KEY'):
-    raise Exception("Please add LS_API_KEY to your config.py")
+# Validate API key on load
+if not getattr(config, "LS_API_KEY", "").strip():
+    raise ValueError("❌ InshortURL API key (LS_API_KEY) is missing in config.py.")
 
-# InshortURL API endpoint
 INSHORT_API_URL = "https://inshorturl.com/api"
+URL_PATTERN = re.compile(r'^https?://[^\s]+$')
 
 @Client.on_message(filters.command("short") & filters.user(config.ADMIN_IDS))
-async def short_url_command(client, message):
+async def short_url_command(client: Client, message: Message):
     """
     Command: /short <url>
-    Description: Shortens a URL using InshortURL API
+    Description: Shortens a URL using the InshortURL API.
+    Only accessible by admin users defined in config.ADMIN_IDS.
     """
     try:
-        command = message.text.split()
-        if len(command) != 2:
+        parts = message.text.split(maxsplit=1)
+        if len(parts) != 2:
             await message.reply_text(
                 "❌ **Invalid command format!**\n\n"
                 "**Usage:** `/short <url>`\n"
@@ -30,26 +33,29 @@ async def short_url_command(client, message):
             )
             return
 
-        url = command[1]
+        url = parts[1].strip()
 
-        status_msg = await message.reply_text(
-            "🔄 **Processing your URL...**",
-            quote=True
-        )
+        if not URL_PATTERN.match(url):
+            await message.reply_text(
+                "❌ **Invalid URL format.**\nMake sure the URL starts with `http://` or `https://`.",
+                quote=True
+            )
+            return
+
+        status_msg = await message.reply_text("🔄 **Processing your URL...**", quote=True)
 
         params = {
-            'api': config.LS_API_KEY,
-            'url': url
+            "api": config.LS_API_KEY,
+            "url": url
         }
 
-        await asyncio.sleep(2)  # Async sleep instead of time.sleep
+        async with httpx.AsyncClient() as client_http:
+            response = await client_http.get(INSHORT_API_URL, params=params)
+            response.raise_for_status()
+            data = response.json()
 
-        response = requests.get(INSHORT_API_URL, params=params)
-        response.raise_for_status()
-        data = response.json()
-
-        if data.get('status') == 'success':
-            shortened_url = data.get('shortenedUrl')  # ✅ Correct key from API
+        if data.get("status") == "success":
+            shortened_url = data.get("shortenedUrl")
 
             await status_msg.edit_text(
                 f"✅ **URL Shortened Successfully!**\n\n"
@@ -63,18 +69,13 @@ async def short_url_command(client, message):
                 "Please check your URL and try again."
             )
 
-    except IndexError:
-        await message.reply_text(
-            "❌ **Please provide a URL to shorten!**\n\n"
-            "**Usage:** `/short <url>`",
-            quote=True
-        )
-    except requests.RequestException as e:
+    except httpx.HTTPError as e:
+        logger.exception("HTTP error during URL shortening")
         await status_msg.edit_text(
-            f"❌ **API Error:**\n`{str(e)}`\n\n"
-            "Please try again later."
+            f"❌ **API Error:**\n`{str(e)}`\n\nPlease try again later."
         )
     except Exception as e:
+        logger.exception("Unexpected error in /short command")
         await status_msg.edit_text(
             f"❌ **An unexpected error occurred:**\n`{str(e)}`"
         )
