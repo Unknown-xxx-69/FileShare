@@ -2,7 +2,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from database import Database
 from utils import ButtonManager
-from utils.message_delete import schedule_message_deletion  # ✅ Fixed import
+from .utils.message_delete import schedule_message_deletion
 import config
 import asyncio
 import logging
