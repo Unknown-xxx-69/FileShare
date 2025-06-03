@@ -2,116 +2,95 @@ from typing import List, Dict
 import os
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
-# Bot Configuration
+# --- Bot Credentials ---
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 API_ID = int(os.getenv("API_ID"))
 API_HASH = os.getenv("API_HASH")
-
 OWNER_ID = int(os.getenv("OWNER_ID", 7500269454))
 
-# Database Configuration
+# --- Database ---
 MONGO_URI = os.getenv("MONGO_URI")
 DATABASE_NAME = os.getenv("DATABASE_NAME")
 
-# Channel Configuration 
+# --- Channels ---
 DB_CHANNEL_ID = int(os.getenv("DB_CHANNEL_ID"))
-FORCE_SUB_CHANNEL = int(os.getenv("FORCE_SUB_CHANNEL")) # First force sub channel
-FORCE_SUB_CHANNEL_2 = int(os.getenv("FORCE_SUB_CHANNEL_2", 0)) # Second force sub channel, defaults to 0 if not set
+
+FORCE_SUB_CHANNEL = int(os.getenv("FORCE_SUB_CHANNEL"))
+FORCE_SUB_CHANNEL_2 = int(os.getenv("FORCE_SUB_CHANNEL_2", 0))
 FORCE_SUB_CHANNEL_3 = int(os.getenv("FORCE_SUB_CHANNEL_3", 0))
 FORCE_SUB_CHANNEL_4 = int(os.getenv("FORCE_SUB_CHANNEL_4", 0))
 
-# Add a second channel link
-CHANNEL_LINK = os.getenv("CHANNEL_LINK") # First channel link
-CHANNEL_LINK_2 = os.getenv("CHANNEL_LINK_2", "") # Second channel link
-CHANNEL_LINK_3 = os.getenv("CHANNEL_LINK_3", "") 
-CHANNEL_LINK_4 = os.getenv("CHANNEL_LINK_4", "") 
+CHANNEL_LINK = os.getenv("CHANNEL_LINK", "")
+CHANNEL_LINK_2 = os.getenv("CHANNEL_LINK_2", "")
+CHANNEL_LINK_3 = os.getenv("CHANNEL_LINK_3", "")
+CHANNEL_LINK_4 = os.getenv("CHANNEL_LINK_4", "")
 
-#start photo 
-START_PHOTO = os.getenv("START_PHOTO", "") #start photo for bot
-
-# Bot Information
+# --- Bot Identity ---
 BOT_USERNAME = os.getenv("BOT_USERNAME")
-BOT_NAME = os.getenv("BOT_NAME")
+BOT_NAME = os.getenv("BOT_NAME", "FileBot")
 BOT_VERSION = "1.6"
+START_PHOTO = os.getenv("START_PHOTO", "")
 
-# Privacy Mode Configuration and codexbotz delete time
+# --- Developer Info ---
+DEVELOPER_LINK = os.getenv("DEVELOPER_LINK", "https://t.me/Priyaverma2004")
+SUPPORT_LINK = os.getenv("SUPPORT_LINK", "")
+
+# --- Auto Delete Config ---
 PRIVACY_MODE = os.getenv("PRIVACY_MODE", "off").lower() == "on"
 AUTO_DELETE_TIME = int(os.getenv("AUTO_DELETE_TIME", 30))
 
-# Your InShort URL Api Key Here
+# --- InShortURL API Key ---
 LS_API_KEY = os.getenv("LS_API_KEY")
 if not LS_API_KEY:
-    print("⚠️ Arey InshortURL.com se API leke dal .env mein!")
+    print("⚠️ Add LS_API_KEY from inshorturl.com to your .env!")
 
-# Links
-CHANNEL_LINK = os.getenv("CHANNEL_LINK")
-DEVELOPER_LINK = os.getenv("DEVELOPER_LINK")
-SUPPORT_LINK = os.getenv("SUPPORT_LINK")
+# --- Web Pinger ---
+WEB_SERVER = os.getenv("WEB_SERVER", "True").lower() == "true"
+PING_URL = os.getenv("PING_URL", "")
+PING_TIME = int(os.getenv("PING_TIME", 0))
 
-# For Koyeb/render 
-WEB_SERVER = bool(os.getenv("WEB_SERVER", True)) # make it True if deploying on koyeb/render else False
-PING_URL = os.getenv("PING_URL") # add your koyeb/render's public url
-PING_TIME = int(os.getenv("PING_TIME")) # Add time_out in seconds
-
-# Admin IDs - Convert space-separated string to list of integers
+# --- Admins ---
 ADMIN_IDS: List[int] = [
-    int(admin_id.strip())
-    for admin_id in os.getenv("ADMIN_IDS", "").split()
-    if admin_id.strip().isdigit()
+    int(uid) for uid in os.getenv("ADMIN_IDS", "").split() if uid.strip().isdigit()
 ]
 
-# File size limit (2GB in bytes)
-MAX_FILE_SIZE = 2000 * 1024 * 1024
+# --- File Limits ---
+MAX_FILE_SIZE = 2_000 * 1024 * 1024  # 2GB
 
-# Supported file types and extensions
 SUPPORTED_TYPES = [
-    "document",
-    "video",
-    "audio",
-    "photo",
-    "voice",
-    "video_note",
-    "animation"
+    "document", "video", "audio", "photo", "voice", "video_note", "animation"
 ]
 
 SUPPORTED_EXTENSIONS = [
-    # Documents
+    # Docs
     "pdf", "txt", "doc", "docx", "xls", "xlsx", "ppt", "pptx",
-    # Programming Files
+    # Code
     "py", "js", "html", "css", "json", "xml", "yaml", "yml",
     # Archives
     "zip", "rar", "7z", "tar", "gz", "bz2",
-    # Media Files
-    "mp4", "mp3", "m4a", "wav", "avi", "mkv", "flv", "mov",
-    "webm", "3gp", "m4v", "ogg", "opus",
+    # Media
+    "mp4", "mp3", "m4a", "wav", "avi", "mkv", "flv", "mov", "webm", "3gp", "m4v", "ogg", "opus",
     # Images
     "jpg", "jpeg", "png", "gif", "webp", "bmp", "ico",
-    # Applications
+    # Apps
     "apk", "exe", "msi", "deb", "rpm",
-    # Other
-    "txt", "text", "log", "csv", "md", "srt", "sub"
+    # Misc
+    "text", "log", "csv", "md", "srt", "sub"
 ]
 
 SUPPORTED_MIME_TYPES = [
-    "application/pdf",
-    "application/msword",
+    "application/pdf", "application/msword",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    "application/zip",
-    "application/x-rar-compressed",
-    "application/x-7z-compressed",
-    "video/mp4",
-    "audio/mpeg",
-    "audio/mp4",
-    "image/jpeg",
-    "image/png",
-    "image/gif",
+    "application/zip", "application/x-rar-compressed", "application/x-7z-compressed",
+    "video/mp4", "audio/mpeg", "audio/mp4",
+    "image/jpeg", "image/png", "image/gif",
     "application/vnd.android.package-archive",
     "application/x-executable",
 ]
 
+# --- Messages ---
 class Messages:
     START_TEXT = """
 🎉 **Welcome to {bot_name}!** 🎉
@@ -163,7 +142,6 @@ Use /help to see available commands!
 **Language:** Python
 **Framework:** Pyrogram
 
-
 **Features:**
 • Secure File Sharing
 • Force Subscribe
@@ -173,7 +151,6 @@ Use /help to see available commands!
 • Enhanced Security
 • Automatic File Type Detection
 
-
 Made with ❤️ by @Priyaverma2004
 """
 
@@ -182,7 +159,7 @@ Made with ❤️ by @Priyaverma2004
 
 **Name:** `{file_name}`
 **Size:** {file_size}
-**Type:** {file_type}
+**Type:** {file_type}`
 **Downloads:** {downloads}
 **Uploaded:** {upload_time}
 **By:** {uploader}
@@ -194,58 +171,40 @@ Made with ❤️ by @Priyaverma2004
     FORCE_SUB_TEXT = """
 ⚠️ **Access Restricted!**
 
-Please join our channe/group to use this bot!
+Please join our channel/group to use this bot!
 
 Click button below, then try again!
 """
 
+# --- Button Layouts (Optional JSON-style) ---
 class Buttons:
     def start_buttons() -> List[List[Dict[str, str]]]:
         return [
-            [
-                {"text": "Help 📚", "callback_data": "help"},
-                {"text": "About ℹ️", "callback_data": "about"}
-            ],
-            [
-                {"text": "Channel 📢", "url": CHANNEL_LINK},
-                {"text": "❄️ Owner ❄️", "url": DEVELOPER_LINK}
-            ]
+            [{"text": "Help 📚", "callback_data": "help"}, {"text": "About ℹ️", "callback_data": "about"}],
+            [{"text": "Channel 📢", "url": CHANNEL_LINK}],
+            [{"text": "❄️ Owner ❄️", "url": DEVELOPER_LINK}]
         ]
 
     def help_buttons() -> List[List[Dict[str, str]]]:
         return [
-            [
-                {"text": "Home 🏠", "callback_data": "home"},
-                {"text": "About ℹ️", "callback_data": "about"}
-            ],
-            [
-                {"text": "Channel 📢", "url": CHANNEL_LINK}
-            ]
+            [{"text": "Home 🏠", "callback_data": "home"}, {"text": "About ℹ️", "callback_data": "about"}],
+            [{"text": "Channel 📢", "url": CHANNEL_LINK}]
         ]
 
     def about_buttons() -> List[List[Dict[str, str]]]:
         return [
-            [
-                {"text": "Home 🏠", "callback_data": "home"},
-                {"text": "Help 📚", "callback_data": "help"}
-            ],
-            [
-                {"text": "Channel 📢", "url": CHANNEL_LINK}
-            ]
+            [{"text": "Home 🏠", "callback_data": "home"}, {"text": "Help 📚", "callback_data": "help"}],
+            [{"text": "Channel 📢", "url": CHANNEL_LINK}]
         ]
 
     def file_buttons(file_uuid: str) -> List[List[Dict[str, str]]]:
         return [
-            [
-                {"text": "Download 📥", "callback_data": f"download_{file_uuid}"},
-                {"text": "Share 🔗", "callback_data": f"share_{file_uuid}"}
-            ],
-            [
-                {"text": "Channel 📢", "url": CHANNEL_LINK}
-            ]
+            [{"text": "Download 📥", "callback_data": f"download_{file_uuid}"},
+             {"text": "Share 🔗", "callback_data": f"share_{file_uuid}"}],
+            [{"text": "Channel 📢", "url": CHANNEL_LINK}]
         ]
 
-
+# --- Upload Progress Display ---
 class Progress:
     PROGRESS_BAR = "█"
     EMPTY_PROGRESS_BAR = "░"
