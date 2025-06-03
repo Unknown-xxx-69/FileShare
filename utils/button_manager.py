@@ -15,23 +15,24 @@ def remove_surrogates(text: str) -> str:
 
 class ButtonManager:
     def __init__(self):
-        self.force_sub_channel = config.FORCE_SUB_CHANNEL
-        self.force_sub_channel_2 = config.FORCE_SUB_CHANNEL_2
-        self.force_sub_channel_3 = config.FORCE_SUB_CHANNEL_3
-        self.force_sub_channel_4 = config.FORCE_SUB_CHANNEL_4
+        self.force_sub_channels = [
+            config.FORCE_SUB_CHANNEL,
+            config.FORCE_SUB_CHANNEL_2,
+            config.FORCE_SUB_CHANNEL_3,
+            config.FORCE_SUB_CHANNEL_4
+        ]
         self.db_channel = config.DB_CHANNEL_ID
 
     async def check_force_sub(self, client, user_id: int) -> bool:
         try:
-            for ch_id in [self.force_sub_channel, self.force_sub_channel_2,
-                          self.force_sub_channel_3, self.force_sub_channel_4]:
+            for ch_id in self.force_sub_channels:
                 if ch_id != 0:
                     member = await client.get_chat_member(ch_id, user_id)
                     if member.status in ["left", "kicked"]:
                         return False
             return True
         except Exception as e:
-            logger.error(f"Force sub check error: {e}")
+            logger.error(f"Force sub check error for user {user_id}: {e}")
             return False
 
     async def show_start(self, client, callback_query: CallbackQuery):
@@ -42,7 +43,7 @@ class ButtonManager:
             ))
 
             if callback_query.message.caption == caption:
-                logger.warning("Start message not modified to avoid Telegram error.")
+                logger.warning(f"Start message not modified for user {callback_query.from_user.id} to avoid Telegram error.")
                 return
 
             await callback_query.message.edit_media(
@@ -53,14 +54,14 @@ class ButtonManager:
                 reply_markup=self.start_button()
             )
         except Exception as e:
-            logger.error(f"Show start error: {e}")
+            logger.error(f"Show start error for user {callback_query.from_user.id}: {e}")
 
     async def show_help(self, client, callback_query: CallbackQuery):
         try:
             help_text = remove_surrogates(config.Messages.HELP_TEXT)
 
             if callback_query.message.text == help_text:
-                logger.warning("Help message not modified to avoid Telegram error.")
+                logger.warning(f"Help message not modified for user {callback_query.from_user.id} to avoid Telegram error.")
                 return
 
             await callback_query.message.edit_text(
@@ -68,7 +69,7 @@ class ButtonManager:
                 reply_markup=self.help_button()
             )
         except Exception as e:
-            logger.error(f"Show help error: {e}")
+            logger.error(f"Show help error for user {callback_query.from_user.id}: {e}")
 
     async def show_about(self, client, callback_query: CallbackQuery):
         try:
@@ -78,7 +79,7 @@ class ButtonManager:
             ))
 
             if callback_query.message.text == about_text:
-                logger.warning("About message not modified to avoid Telegram error.")
+                logger.warning(f"About message not modified for user {callback_query.from_user.id} to avoid Telegram error.")
                 return
 
             await callback_query.message.edit_text(
@@ -86,7 +87,17 @@ class ButtonManager:
                 reply_markup=self.about_button()
             )
         except Exception as e:
-            logger.error(f"Show about error: {e}")
+            logger.error(f"Show about error for user {callback_query.from_user.id}: {e}")
+
+    def _channel_buttons(self) -> List[InlineKeyboardButton]:
+        if config.CHANNEL_LINK and config.CHANNEL_LINK_2:
+            return [
+                InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK),
+                InlineKeyboardButton("Support 🆘", url=config.CHANNEL_LINK_2)
+            ]
+        elif config.CHANNEL_LINK:
+            return [InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK)]
+        return []
 
     def force_sub_button(self) -> InlineKeyboardMarkup:
         buttons = []
@@ -114,14 +125,9 @@ class ButtonManager:
                 InlineKeyboardButton("About ℹ️", callback_data="about")
             ]
         ]
-        if config.CHANNEL_LINK:
-            if config.CHANNEL_LINK_2:
-                buttons.append([
-                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK),
-                    InlineKeyboardButton("Support 🆘", url=config.CHANNEL_LINK_2)
-                ])
-            else:
-                buttons.append([InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK)])
+        channel_buttons = self._channel_buttons()
+        if channel_buttons:
+            buttons.append(channel_buttons)
 
         buttons.append([InlineKeyboardButton("❄️ Owner ❄️", url=config.DEVELOPER_LINK)])
         return InlineKeyboardMarkup(buttons)
@@ -133,14 +139,9 @@ class ButtonManager:
                 InlineKeyboardButton("About ℹ️", callback_data="about")
             ]
         ]
-        if config.CHANNEL_LINK:
-            if config.CHANNEL_LINK_2:
-                buttons.append([
-                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK),
-                    InlineKeyboardButton("Support 🆘", url=config.CHANNEL_LINK_2)
-                ])
-            else:
-                buttons.append([InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK)])
+        channel_buttons = self._channel_buttons()
+        if channel_buttons:
+            buttons.append(channel_buttons)
 
         return InlineKeyboardMarkup(buttons)
 
@@ -151,14 +152,9 @@ class ButtonManager:
                 InlineKeyboardButton("Help 📜", callback_data="help")
             ]
         ]
-        if config.CHANNEL_LINK:
-            if config.CHANNEL_LINK_2:
-                buttons.append([
-                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK),
-                    InlineKeyboardButton("Support 🆘", url=config.CHANNEL_LINK_2)
-                ])
-            else:
-                buttons.append([InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK)])
+        channel_buttons = self._channel_buttons()
+        if channel_buttons:
+            buttons.append(channel_buttons)
 
         return InlineKeyboardMarkup(buttons)
 
@@ -169,14 +165,9 @@ class ButtonManager:
                 InlineKeyboardButton("Share Link 🔗", callback_data=f"share_{file_uuid}")
             ]
         ]
-        if config.CHANNEL_LINK:
-            if config.CHANNEL_LINK_2:
-                buttons.append([
-                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK),
-                    InlineKeyboardButton("Support 🆘", url=config.CHANNEL_LINK_2)
-                ])
-            else:
-                buttons.append([InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK)])
+        channel_buttons = self._channel_buttons()
+        if channel_buttons:
+            buttons.append(channel_buttons)
 
         return InlineKeyboardMarkup(buttons)
 
@@ -187,13 +178,8 @@ class ButtonManager:
                 InlineKeyboardButton("Share Link 🔗", callback_data=f"share_batch_{batch_uuid}")
             ]
         ]
-        if config.CHANNEL_LINK:
-            if config.CHANNEL_LINK_2:
-                buttons.append([
-                    InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK),
-                    InlineKeyboardButton("Support 🆘", url=config.CHANNEL_LINK_2)
-                ])
-            else:
-                buttons.append([InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK)])
+        channel_buttons = self._channel_buttons()
+        if channel_buttons:
+            buttons.append(channel_buttons)
 
         return InlineKeyboardMarkup(buttons)
