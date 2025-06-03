@@ -102,7 +102,7 @@ class ButtonManager:
             else:
                 buttons.append([InlineKeyboardButton("Updates 📢", url=config.CHANNEL_LINK)])
 
-        buttons.append([InlineKeyboardButton("Developer 👨‍💻", url=config.DEVELOPER_LINK)])
+        buttons.append([InlineKeyboardButton("❄️ Owner ❄️", url=config.DEVELOPER_LINK)])
         return InlineKeyboardMarkup(buttons)
 
     def help_button(self) -> InlineKeyboardMarkup:
