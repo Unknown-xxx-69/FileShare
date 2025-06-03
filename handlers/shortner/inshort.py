@@ -1,10 +1,9 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
 import httpx
-import asyncio
 import logging
 import re
-import config  # Ensure LS_API_KEY and ADMIN_IDS are defined
+import config  # Make sure LS_API_KEY and ADMIN_IDS are defined
 
 logger = logging.getLogger(__name__)
 
@@ -14,6 +13,7 @@ if not getattr(config, "LS_API_KEY", "").strip():
 
 INSHORT_API_URL = "https://inshorturl.com/api"
 URL_PATTERN = re.compile(r'^https?://[^\s]+$')
+
 
 @Client.on_message(filters.command("short") & filters.user(config.ADMIN_IDS))
 async def short_url_command(client: Client, message: Message):
@@ -52,7 +52,7 @@ async def short_url_command(client: Client, message: Message):
         async with httpx.AsyncClient() as client_http:
             response = await client_http.get(INSHORT_API_URL, params=params)
             response.raise_for_status()
-            data = await response.json()  # ✅ Awaited here
+            data = response.json()  # ✅ FIXED: removed await
 
         if data.get("status") == "success":
             shortened_url = data.get("shortenedUrl")
@@ -65,17 +65,19 @@ async def short_url_command(client: Client, message: Message):
             )
         else:
             await status_msg.edit_text(
-                "❌ **Failed to shorten URL!**\n\n"
-                "Please check your URL and try again."
+                f"❌ **Failed to shorten URL!**\n\n"
+                f"**Reason:** `{data.get('message', 'Unknown error.')}`"
             )
 
     except httpx.HTTPError as e:
         logger.exception("HTTP error during URL shortening")
-        await status_msg.edit_text(
-            f"❌ **API Error:**\n`{str(e)}`\n\nPlease try again later."
+        await message.reply_text(
+            f"❌ **API Error:**\n`{str(e)}`\n\nPlease try again later.",
+            quote=True
         )
     except Exception as e:
         logger.exception("Unexpected error in /short command")
-        await status_msg.edit_text(
-            f"❌ **An unexpected error occurred:**\n`{str(e)}`"
+        await message.reply_text(
+            f"❌ **An unexpected error occurred:**\n`{str(e)}`",
+            quote=True
         )
