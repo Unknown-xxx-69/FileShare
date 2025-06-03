@@ -128,7 +128,7 @@ Hello {user_mention}! I'm your secure file sharing assistant.
     ABOUT_TEXT = """
 ℹ️ **About {bot_name}**
 
-**Version:** {version}  
+**Version:** `{version}`
 **Owner:** @Priyaverma2004  
 **Language:** Python  
 **Framework:** Pyrogram  
