@@ -2,12 +2,20 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup
 from config import Messages, Buttons, BOT_NAME
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
+# Safely remove emojis and invalid surrogates
 def safe_utf(text: str) -> str:
-    # Removes invalid UTF-16 surrogate pairs to prevent UnicodeEncodeError
-    return ''.join(c for c in text if not (0xD800 <= ord(c) <= 0xDFFF))
+    emoji_and_surrogate_pattern = re.compile(
+        "["
+        "\U00010000-\U0010FFFF"  # Unicode emojis and supplementary chars
+        "\ud800-\udfff"          # Invalid surrogate range
+        "]+",
+        flags=re.UNICODE
+    )
+    return emoji_and_surrogate_pattern.sub('', text)
 
 @Client.on_message(filters.command("help"))
 async def help_command(client: Client, message: Message):
