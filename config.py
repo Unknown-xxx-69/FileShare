@@ -124,7 +124,7 @@ Hello {user_mention}! I'm your secure file sharing assistant.
 • Multiple File Types Support
 • Real-time Tracking
 
-👨‍💻 Contact @Jaintaniya02 for support
+👨‍💻 Contact @Priyaverma2004 for support
 
 Use /help to see available commands!
 """
@@ -154,14 +154,14 @@ Use /help to see available commands!
 • Forward files & reply with `/batch`.  
 
 
-⚠️ **Need Help?** Contact [@Jaintaniya02](https://t.me/Jaintaniya02)  
+⚠️ **Need Help?** Contact [@Priyaverma2004](https://t.me/Priyaverma2004?text=Hello+😊)  
 """
 
     ABOUT_TEXT = """
 ℹ️ **About {bot_name}**
 
 **Version:** `{version}`
-**Owner:** @Jaintaniya02
+**Owner:** @Priyaverma2004
 **Language:** Python
 **Framework:** Pyrogram
 
@@ -176,7 +176,7 @@ Use /help to see available commands!
 • Automatic File Type Detection
 
 
-Made with ❤️ by @Jaintaniya02
+Made with ❤️ by @Priyaverma2004
 """
 
     FILE_TEXT = """
