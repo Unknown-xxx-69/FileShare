@@ -44,7 +44,7 @@ AUTO_DELETE_TIME = int(os.getenv("AUTO_DELETE_TIME", 30))
 # --- InShortURL API Key ---
 LS_API_KEY = os.getenv("LS_API_KEY")
 if not LS_API_KEY:
-    print("⚠️ Add LS_API_KEY from inshorturl.com to your .env!")
+    print("Add LS_API_KEY from inshorturl.com to your .env!")
 
 # --- Web Pinger ---
 WEB_SERVER = os.getenv("WEB_SERVER", "True").lower() == "true"
@@ -64,19 +64,12 @@ SUPPORTED_TYPES = [
 ]
 
 SUPPORTED_EXTENSIONS = [
-    # Docs
     "pdf", "txt", "doc", "docx", "xls", "xlsx", "ppt", "pptx",
-    # Code
     "py", "js", "html", "css", "json", "xml", "yaml", "yml",
-    # Archives
     "zip", "rar", "7z", "tar", "gz", "bz2",
-    # Media
     "mp4", "mp3", "m4a", "wav", "avi", "mkv", "flv", "mov", "webm", "3gp", "m4v", "ogg", "opus",
-    # Images
     "jpg", "jpeg", "png", "gif", "webp", "bmp", "ico",
-    # Apps
     "apk", "exe", "msi", "deb", "rpm",
-    # Misc
     "text", "log", "csv", "md", "srt", "sub"
 ]
 
@@ -93,56 +86,56 @@ SUPPORTED_MIME_TYPES = [
 # --- Messages ---
 class Messages:
     START_TEXT = """
-🎉 **Welcome to {bot_name}!** 🎉
+Welcome to {bot_name}!
 
 Hello {user_mention}! I'm your secure file sharing assistant.
 
-🔐 **Key Features:**
+Key Features:
 • Secure File Sharing
 • Unique Download Links
 • Multiple File Types Support
 • Real-time Tracking
 
-👨‍💻 Contact @Priyaverma2004 for support
+Contact @Priyaverma2004 for support
 
 Use /help to see available commands!
 """
 
     HELP_TEXT = """
-📚 **Available Commands**
+Available Commands
 
-👥 **User Commands:**  
-• `/start` – Start the bot  
-• `/help` – Show this help menu  
-• `/about` – Get bot details  
-• `/short [url]` – Shorten a link (e.g., `/short example.com`)
+User Commands:  
+• /start – Start the bot  
+• /help – Show this help menu  
+• /about – Get bot details  
+• /short [url] – Shorten a link (e.g., /short example.com)
 
-👑 **Admin Commands:**  
-• `/upload` – Upload a file (reply to a file)  
-• `/stats` – View bot statistics  
-• `/bcast` – Broadcast a message to all users  
-• `/auto_del` – Set auto-delete timer  
+Admin Commands:  
+• /upload – Upload a file (reply to a file)  
+• /stats – View bot statistics  
+• /bcast – Broadcast a message to all users  
+• /auto_del – Set auto-delete timer  
 
-🗑️ **Auto-Delete System:**  
+Auto-Delete System:  
 • Files are auto-deleted after a set time  
-• Use `/auto_del` to modify the timer  
+• Use /auto_del to modify the timer  
 
-📦 **Batch System:**  
-• `/batch` – Group files into one link  
-• Forward files, then reply with `/batch`
+Batch System:  
+• /batch – Group files into one link  
+• Forward files, then reply with /batch
 
-❓ **Need Help?** Contact [@Priyaverma2004](https://t.me/Priyaverma2004?text=Hello+😊)
+Need Help? Contact @Priyaverma2004
 """
 
     ABOUT_TEXT = """
-ℹ️ **About {bot_name}**
+About {bot_name}
 
-**Version:** `{version}`
-**Owner:** @Priyaverma2004
-**Language:** Python
-**Framework:** Pyrogram
+Version: {version}
+Owner: @Priyaverma2004
+Language: Python
+Framework: Pyrogram
 
-**Features:**
+Features:
 • Secure File Sharing
 • Force Subscribe
 • Admin Controls
@@ -151,68 +144,68 @@ Use /help to see available commands!
 • Enhanced Security
 • Automatic File Type Detection
 
-Made with ❤️ by @Priyaverma2004
+Made by @Priyaverma2004
 """
 
     FILE_TEXT = """
-📁 **File Details**
+File Details
 
-**Name:** `{file_name}`
-**Size:** {file_size}
-**Type:** {file_type}`
-**Downloads:** {downloads}
-**Uploaded:** {upload_time}
-**By:** {uploader}
+Name: {file_name}
+Size: {file_size}
+Type: {file_type}
+Downloads: {downloads}
+Uploaded: {upload_time}
+By: {uploader}
 
-🔗 **Share Link:**
-`{share_link}`
+Share Link:
+{share_link}
 """
 
     FORCE_SUB_TEXT = """
-⚠️ **Access Restricted!**
+Access Restricted!
 
-Please join our channel/group to use this bot!
+Please join our channel/group to use this bot.
 
-Click button below, then try again!
+Click the button below, then try again.
 """
 
-# --- Button Layouts (Optional JSON-style) ---
+# --- Button Layouts ---
 class Buttons:
     def start_buttons() -> List[List[Dict[str, str]]]:
         return [
-            [{"text": "Help 📚", "callback_data": "help"}, {"text": "About ℹ️", "callback_data": "about"}],
-            [{"text": "Channel 📢", "url": CHANNEL_LINK}],
-            [{"text": "❄️ Owner ❄️", "url": DEVELOPER_LINK}]
+            [{"text": "Help", "callback_data": "help"}, {"text": "About", "callback_data": "about"}],
+            [{"text": "Channel", "url": CHANNEL_LINK}],
+            [{"text": "Owner", "url": DEVELOPER_LINK}]
         ]
 
     def help_buttons() -> List[List[Dict[str, str]]]:
         return [
-            [{"text": "Home 🏠", "callback_data": "home"}, {"text": "About ℹ️", "callback_data": "about"}],
-            [{"text": "Channel 📢", "url": CHANNEL_LINK}]
+            [{"text": "Home", "callback_data": "home"}, {"text": "About", "callback_data": "about"}],
+            [{"text": "Channel", "url": CHANNEL_LINK}]
         ]
 
     def about_buttons() -> List[List[Dict[str, str]]]:
         return [
-            [{"text": "Home 🏠", "callback_data": "home"}, {"text": "Help 📚", "callback_data": "help"}],
-            [{"text": "Channel 📢", "url": CHANNEL_LINK}]
+            [{"text": "Home", "callback_data": "home"}, {"text": "Help", "callback_data": "help"}],
+            [{"text": "Channel", "url": CHANNEL_LINK}]
         ]
 
     def file_buttons(file_uuid: str) -> List[List[Dict[str, str]]]:
         return [
-            [{"text": "Download 📥", "callback_data": f"download_{file_uuid}"},
-             {"text": "Share 🔗", "callback_data": f"share_{file_uuid}"}],
-            [{"text": "Channel 📢", "url": CHANNEL_LINK}]
+            [{"text": "Download", "callback_data": f"download_{file_uuid}"},
+             {"text": "Share", "callback_data": f"share_{file_uuid}"}],
+            [{"text": "Channel", "url": CHANNEL_LINK}]
         ]
 
 # --- Upload Progress Display ---
 class Progress:
-    PROGRESS_BAR = "█"
-    EMPTY_PROGRESS_BAR = "░"
+    PROGRESS_BAR = "#"
+    EMPTY_PROGRESS_BAR = "-"
     PROGRESS_TEXT = """
-**{0}** {1}% 
+{0} {1}%
 
-**⚡️ Speed:** {2}/s
-**💫 Done:** {3}
-**💭 Total:** {4}
-**⏰ Time Left:** {5}
+Speed: {2}/s
+Done: {3}
+Total: {4}
+Time Left: {5}
 """
