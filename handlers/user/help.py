@@ -21,6 +21,7 @@ async def help_command(client: Client, message: Message):
         "• /bcast_time - Broadcast time on or off to send broadcast in time.\n\n"
         "💡 **Auto-Delete Feature:**\n"
         "Files are automatically deleted after the set time.\n"
-        "Use /auto_del to change the deletion time. • /short - to shorten any url in modiji,usage :- /short example.com"
+        "Use /auto_del to change the deletion time."
+        "• /short - to shorten any URL in InshortURL, Syntax :- /short https://example.com"
     )
     await message.reply_text(help_text, reply_markup=button_manager.help_button())
