@@ -142,7 +142,7 @@ Hello {user_mention}! I'm your secure file sharing assistant.
 • Enhanced Security  
 • Auto File Type Detection
 
-\\> 👨‍💻 Made with ❤️ by \\@Priyaverma2004
+_👨‍💻 Made with ❤️ by @Priyaverma2004_
 """
 
     FILE_TEXT = """
