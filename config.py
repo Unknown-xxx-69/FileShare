@@ -41,10 +41,10 @@ BOT_VERSION = "1.6"
 PRIVACY_MODE = os.getenv("PRIVACY_MODE", "off").lower() == "on"
 AUTO_DELETE_TIME = int(os.getenv("AUTO_DELETE_TIME", 30))
 
-# Your Modiji Url Api Key Here
-MODIJI_API_KEY = os.getenv("MODIJI_API_KEY")
-if not MODIJI_API_KEY:
-    print("⚠️ Warning: MODIJI_API_KEY not set in environment variables")
+# Your InShort URL Api Key Here
+LS_API_KEY = os.getenv("LS_API_KEY")
+if not LS_API_KEY:
+    print("⚠️ Arey InshortURL.com se API leke dal .env mein!")
 
 # Links
 CHANNEL_LINK = os.getenv("CHANNEL_LINK")
@@ -124,8 +124,7 @@ Hello {user_mention}! I'm your secure file sharing assistant.
 • Multiple File Types Support
 • Real-time Tracking
 
-📢 Join @BotVerseRavi for updates!
-👨‍💻 Contact @Unknown_RK01 for support
+👨‍💻 Contact @Jaintaniya02 for support
 
 Use /help to see available commands!
 """
@@ -155,19 +154,17 @@ Use /help to see available commands!
 • Forward files & reply with `/batch`.  
 
 
-⚠️ **Need Help?** Contact [@Unknown_RK01](https://t.me/Unknown_RK01)  
+⚠️ **Need Help?** Contact [@Jaintaniya02](https://t.me/Jaintaniya02)  
 """
 
     ABOUT_TEXT = """
 ℹ️ **About {bot_name}**
 
 **Version:** `{version}`
-**Developer:** @Unknown_RK01
+**Owner:** @Jaintaniya02
 **Language:** Python
 **Framework:** Pyrogram
 
-📢 **Updates:** @BotVerseRavi
-🛠 **Support:** @BotVerseRaviSupport
 
 **Features:**
 • Secure File Sharing
@@ -179,7 +176,7 @@ Use /help to see available commands!
 • Automatic File Type Detection
 
 
-Made with ❤️ by @Unknown_RK01
+Made with ❤️ by @Jaintaniya02
 """
 
     FILE_TEXT = """
@@ -199,8 +196,7 @@ Made with ❤️ by @Unknown_RK01
     FORCE_SUB_TEXT = """
 ⚠️ **Access Restricted!**
 
-Please join our channel to use this bot:
-Bot By @BotVerseRavi
+Please join our channe/group to use this bot!
 
 Click button below, then try again!
 """
@@ -214,7 +210,7 @@ class Buttons:
             ],
             [
                 {"text": "Channel 📢", "url": CHANNEL_LINK},
-                {"text": "Developer 👨‍💻", "url": DEVELOPER_LINK}
+                {"text": "❄️ Owner ❄️", "url": DEVELOPER_LINK}
             ]
         ]
 
