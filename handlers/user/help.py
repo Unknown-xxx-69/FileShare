@@ -1,29 +1,27 @@
 from pyrogram import Client, filters
-from pyrogram.types import Message, InlineKeyboardMarkup
-from config import Messages, Buttons, BOT_NAME
-import logging
-import re
+from pyrogram.types import Message
+from utils import ButtonManager
 
-logger = logging.getLogger(__name__)
-
-# Safely remove emojis and invalid surrogates
-def safe_utf(text: str) -> str:
-    emoji_and_surrogate_pattern = re.compile(
-        "["
-        "\U00010000-\U0010FFFF"  # Unicode emojis and supplementary chars
-        "\ud800-\udfff"          # Invalid surrogate range
-        "]+",
-        flags=re.UNICODE
-    )
-    return emoji_and_surrogate_pattern.sub('', text)
+button_manager = ButtonManager()
 
 @Client.on_message(filters.command("help"))
 async def help_command(client: Client, message: Message):
-    try:
-        help_text = safe_utf(Messages.HELP_TEXT.format(bot_name=BOT_NAME))
-        await message.reply_text(
-            help_text,
-            reply_markup=InlineKeyboardMarkup(Buttons.help_buttons())
-        )
-    except Exception as e:
-        logger.error(f"[HELP CMD ERROR] User: {message.from_user.id} | Error: {e}")
+    help_text = (
+        "**📚 Bot Commands & Usage**\n\n"
+        "Here are the available commands:\n\n"
+        "👥 **User Commands:**\n"
+        "• /start - Start the bot\n"
+        "• /help - Show this help message\n"
+        "• /about - About the bot\n\n"
+        "👮‍♂️ **Admin Commands:**\n"
+        "• /upload - Upload a file (reply to file)\n"
+        "• /auto_del - Set auto-delete time\n"
+        "• /stats - View bot statistics\n"
+        "• /bcast - Broadcast message to users\n"
+        "• /bcast_time - Broadcast time on or off to send broadcast in time.\n\n"
+        "💡 **Auto-Delete Feature:**\n"
+        "Files are automatically deleted after the set time.\n"
+        "Use /auto_del to change the deletion time."
+        "• /short - to shorten any URL in Inshort URL, Syntax :- /short https://example.com"
+    )
+    await message.reply_text(help_text, reply_markup=button_manager.help_button())
