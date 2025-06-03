@@ -86,44 +86,43 @@ SUPPORTED_MIME_TYPES = [
 # --- Messages ---
 class Messages:
     START_TEXT = """
-👋 Welcome to {bot_name}!
+👋 **Welcome to {bot_name}!**
 
 Hello {user_mention}! I'm your secure file sharing assistant.
 
-🔐 Key Features:
+🔐 **Key Features:**
 • Secure File Sharing
 • Unique Download Links
 • Multiple File Types Support
 • Real-time Tracking
 
 📞 Contact @Priyaverma2004 for support  
-💡 Use /help to see available commands!
+💡 Use `/help` to see available commands!
 """
 
     HELP_TEXT = """
 📚 **Available Commands**
 
 👤 **User Commands:**
-• /start – Start the bot  
-• /help – Show this help menu  
-• /about – Get bot details  
-• /short [url] – Shorten a link (e.g., /short https://example.com)
+• `/start` – Start the bot  
+• `/help` – Show this help menu  
+• `/about` – Get bot details  
+• `/short [url]` – Shorten a link (e.g., /short https://example.com)
 
 👮 **Admin Commands:**
-• /upload – Upload a file (reply to a file)  
-• /stats – View bot statistics  
-• /bcast – Broadcast a message to all users  
-• /auto_del – Set auto-delete timer  
+• `/upload` – Upload a file (reply to a file)  
+• `/stats` – View bot statistics  
+• `/bcast` – Broadcast a message to all users   
 
 🗑️ **Auto-Delete System**
 • Files are auto-deleted after a set time  
-• Use /auto_del to modify the timer
+• To modify the Auto Delete Time, contact the Developer.
 
 📦 **Batch System**
-• /batch – Group files into one link  
+• `/batch` – Group files into one link  
 • Forward files, then reply with /batch
 
-Need Help? Contact @Priyaverma2004
+🚨 **Need Help? Contact** @Priyaverma2004
 """
 
     ABOUT_TEXT = """
@@ -143,7 +142,7 @@ Need Help? Contact @Priyaverma2004
 • Enhanced Security  
 • Auto File Type Detection
 
-👨‍💻 Made with ❤️ by @Priyaverma2004
+\\> 👨‍💻 Made with ❤️ by \\@Priyaverma2004
 """
 
     FILE_TEXT = """
