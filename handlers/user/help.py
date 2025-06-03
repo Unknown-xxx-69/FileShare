@@ -18,11 +18,10 @@ async def help_command(client: Client, message: Message):
         "• /auto_del - Set auto-delete time\n"
         "• /stats - View bot statistics\n"
         "• /bcast - Broadcast message to users\n"
-        "• /bcast_time - Toggle broadcast time-based sending\n\n"
         "**Auto-Delete Feature:**\n"
         "Files are automatically deleted after the set time.\n"
         "Use /auto_del to change the deletion time.\n\n"
         "**Link Shortener:**\n"
         "Use /short to shorten any URL. Syntax: `/short https://example.com`"
     )
-    await message.reply_text(help_text, reply_markup=button_manager.help_button())
+    await message.reply_text(help_text, reply_markup=button_manager.help_button(), parse_mode="Markdown")
