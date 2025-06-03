@@ -1,0 +1,59 @@
+# Exported from Render on 2025-06-03T09:14:04Z
+services:
+- type: web
+  name: FileShare (Sold)
+  runtime: python
+  repo: https://github.com/Unknown-xxx-69/FileShare
+  plan: free
+  envVars:
+  - key: OWNER_ID
+    sync: false
+  - key: ADMIN_IDS
+    sync: false
+  - key: BOT_TOKEN
+    sync: false
+  - key: START_PHOTO
+    sync: false
+  - key: WEB_SERVER
+    sync: false
+  - key: SUPPORT_LINK
+    sync: false
+  - key: PRIVACY_MODE
+    sync: false
+  - key: PING_URL
+    sync: false
+  - key: PING_TIME
+    sync: false
+  - key: MONGO_URI
+    sync: false
+  - key: LS_API_KEY
+    sync: false
+  - key: FORCE_SUB_CHANNEL_2
+    sync: false
+  - key: FORCE_SUB_CHANNEL
+    sync: false
+  - key: DEVELOPER_LINK
+    sync: false
+  - key: DB_CHANNEL_ID
+    sync: false
+  - key: DATABASE_NAME
+    sync: false
+  - key: CHANNEL_LINK_2
+    sync: false
+  - key: CHANNEL_LINK
+    sync: false
+  - key: BOT_USERNAME
+    sync: false
+  - key: BOT_NAME
+    sync: false
+  - key: AUTO_DELETE_TIME
+    sync: false
+  - key: API_ID
+    sync: false
+  - key: API_HASH
+    sync: false
+  region: oregon
+  buildCommand: pip install -r requirements.txt && pip install --upgrade pip
+  startCommand: python3 main.py
+  autoDeployTrigger: "off"
+version: "1"
