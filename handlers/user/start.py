@@ -38,9 +38,9 @@ async def send_auto_delete_info(client, chat_id, msg_ids: list):
     delete_time = config.AUTO_DELETE_TIME
     info_msg = await client.send_message(
         chat_id=chat_id,
-        text=f"⏳ **Auto Delete Information**\n\n"
-             f"➜ This file will be deleted in {delete_time} minutes.\n"
-             f"➜ Forward this file to your saved messages or another chat to save it permanently.",
+        text=f"Auto Delete Information\n\n"
+             f"> This file will be deleted in {delete_time} minutes.\n"
+             f"> Forward this file to your saved messages or another chat to save it permanently.",
         protect_content=config.PRIVACY_MODE
     )
     if info_msg and info_msg.id:
@@ -61,7 +61,7 @@ async def start_command(client: Client, message: Message):
 
         force_sub_status = await button_manager.check_force_sub(client, message.from_user.id)
         if not force_sub_status:
-            force_sub_text = "**⚠️ You must join our channel(s) to use this bot!**\n\n"
+            force_sub_text = "**You must join our channel(s) to use this bot!**\n\n"
             channels = [
                 (config.FORCE_SUB_CHANNEL, "Join Channel 1"),
                 (config.FORCE_SUB_CHANNEL_2, "Join Channel 2"),
@@ -85,9 +85,9 @@ async def start_command(client: Client, message: Message):
         if message_ids:
             if is_codex_batch:
                 status_msg = await message.reply_text(
-                    f"🔄 **Processing Batch Download**\n\n"
-                    f"📦 Total Files: {len(message_ids)}\n"
-                    f"⏳ Please wait...",
+                    f"Processing Batch Download\n\n"
+                    f"Total Files: {len(message_ids)}\n"
+                    f"Please wait...",
                     protect_content=config.PRIVACY_MODE
                 )
                 success, fail, sent_msgs = 0, 0, []
@@ -111,8 +111,8 @@ async def start_command(client: Client, message: Message):
                     await send_auto_delete_info(client, message.chat.id, sent_msgs)
 
                 await status_msg.edit_text(
-                    f"✅ **Batch Download Complete**\n\n"
-                    f"📥 Sent: {success}\n❌ Failed: {fail}"
+                    f"Batch Download Complete\n\n"
+                    f"Sent: {success}\nFailed: {fail}"
                 )
                 return
             else:
@@ -127,7 +127,7 @@ async def start_command(client: Client, message: Message):
                         await send_auto_delete_info(client, message.chat.id, [msg.id])
                     return
                 except Exception:
-                    await message.reply_text("❌ File not found or has been deleted!", protect_content=config.PRIVACY_MODE)
+                    await message.reply_text("File not found or has been deleted!", protect_content=config.PRIVACY_MODE)
                     return
 
         if command.startswith("batch_"):
@@ -135,13 +135,13 @@ async def start_command(client: Client, message: Message):
             batch_data = await db.get_batch(batch_uuid)
 
             if not batch_data:
-                await message.reply_text("❌ Batch not found or has been deleted!", protect_content=config.PRIVACY_MODE)
+                await message.reply_text("Batch not found or has been deleted!", protect_content=config.PRIVACY_MODE)
                 return
 
             status_msg = await message.reply_text(
-                f"🔄 **Processing Batch Download**\n\n"
-                f"📦 Total Files: {len(batch_data['files'])}\n"
-                f"⏳ Please wait...",
+                f"Processing Batch Download\n\n"
+                f"Total Files: {len(batch_data['files'])}\n"
+                f"Please wait...",
                 protect_content=config.PRIVACY_MODE
             )
 
@@ -170,8 +170,8 @@ async def start_command(client: Client, message: Message):
                 await db.increment_batch_downloads(batch_uuid)
 
             await status_msg.edit_text(
-                f"✅ **Batch Download Complete**\n\n"
-                f"📥 Sent: {success}\n❌ Failed: {fail}"
+                f"Batch Download Complete\n\n"
+                f"Sent: {success}\nFailed: {fail}"
             )
             return
 
@@ -190,9 +190,9 @@ async def start_command(client: Client, message: Message):
                     if config.AUTO_DELETE_TIME:
                         await send_auto_delete_info(client, message.chat.id, [msg.id])
             except Exception as e:
-                await message.reply_text(f"❌ Error: {str(e)}", protect_content=config.PRIVACY_MODE)
+                await message.reply_text(f"Error: {str(e)}", protect_content=config.PRIVACY_MODE)
         else:
-            await message.reply_text("❌ Invalid or expired link.", protect_content=config.PRIVACY_MODE)
+            await message.reply_text("Invalid or expired link.", protect_content=config.PRIVACY_MODE)
 
     else:
         buttons = button_manager.start_button()
