@@ -10,6 +10,9 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+def remove_surrogates(text: str) -> str:
+    return ''.join(c for c in text if not (0xD800 <= ord(c) <= 0xDFFF))
+
 class ButtonManager:
     def __init__(self):
         self.force_sub_channel = config.FORCE_SUB_CHANNEL
@@ -28,44 +31,62 @@ class ButtonManager:
                         return False
             return True
         except Exception as e:
-            logger.error(f"Force sub check error: {str(e)}")
+            logger.error(f"Force sub check error: {e}")
             return False
 
     async def show_start(self, client, callback_query: CallbackQuery):
         try:
+            caption = remove_surrogates(config.Messages.START_TEXT.format(
+                bot_name=config.BOT_NAME,
+                user_mention=callback_query.from_user.mention
+            ))
+
+            if callback_query.message.caption == caption:
+                logger.warning("Start message not modified to avoid Telegram error.")
+                return
+
             await callback_query.message.edit_media(
                 media=InputMediaPhoto(
                     media=config.START_PHOTO,
-                    caption=config.Messages.START_TEXT.format(
-                        bot_name=config.BOT_NAME,
-                        user_mention=callback_query.from_user.mention
-                    )
+                    caption=caption
                 ),
                 reply_markup=self.start_button()
             )
         except Exception as e:
-            logger.error(f"Show start error: {str(e)}")
+            logger.error(f"Show start error: {e}")
 
     async def show_help(self, client, callback_query: CallbackQuery):
         try:
+            help_text = remove_surrogates(config.Messages.HELP_TEXT)
+
+            if callback_query.message.text == help_text:
+                logger.warning("Help message not modified to avoid Telegram error.")
+                return
+
             await callback_query.message.edit_text(
-                config.Messages.HELP_TEXT,
+                help_text,
                 reply_markup=self.help_button()
             )
         except Exception as e:
-            logger.error(f"Show help error: {str(e)}")
+            logger.error(f"Show help error: {e}")
 
     async def show_about(self, client, callback_query: CallbackQuery):
         try:
+            about_text = remove_surrogates(config.Messages.ABOUT_TEXT.format(
+                bot_name=config.BOT_NAME,
+                version=config.BOT_VERSION
+            ))
+
+            if callback_query.message.text == about_text:
+                logger.warning("About message not modified to avoid Telegram error.")
+                return
+
             await callback_query.message.edit_text(
-                config.Messages.ABOUT_TEXT.format(
-                    bot_name=config.BOT_NAME,
-                    version=config.BOT_VERSION
-                ),
+                about_text,
                 reply_markup=self.about_button()
             )
         except Exception as e:
-            logger.error(f"Show about error: {str(e)}")
+            logger.error(f"Show about error: {e}")
 
     def force_sub_button(self) -> InlineKeyboardMarkup:
         buttons = []
