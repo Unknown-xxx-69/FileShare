@@ -52,7 +52,7 @@ async def short_url_command(client: Client, message: Message):
         async with httpx.AsyncClient() as client_http:
             response = await client_http.get(INSHORT_API_URL, params=params)
             response.raise_for_status()
-            data = response.json()
+            data = await response.json()  # ✅ Awaited here
 
         if data.get("status") == "success":
             shortened_url = data.get("shortenedUrl")
