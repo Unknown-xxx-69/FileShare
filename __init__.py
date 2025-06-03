@@ -1,4 +1,3 @@
-
 from .config import (
     BOT_TOKEN,
     API_ID,
@@ -17,7 +16,6 @@ from .config import (
 )
 
 from .database import Database
-from . import utils
 from . import handlers
 
 __version__ = '1.2'
@@ -38,7 +36,6 @@ __all__ = [
     'Messages',
     'Buttons',
     'Database',
-    'utils',
     'handlers'
 ]
 
