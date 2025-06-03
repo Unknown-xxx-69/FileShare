@@ -5,7 +5,7 @@ from utils import ButtonManager
 button_manager = ButtonManager()
 
 def remove_surrogates(text: str) -> str:
-    # Removes invalid UTF-16 surrogates that cause edit_text errors
+    # Removes invalid UTF-16 surrogates that cause encoding errors
     return ''.join(c for c in text if not (0xD800 <= ord(c) <= 0xDFFF))
 
 @Client.on_message(filters.command("help"))
@@ -16,7 +16,7 @@ async def help_command(client: Client, message: Message):
         "├• `/start` — Start the bot\n"
         "├• `/help` — Show this help message\n"
         "└• `/about` — About the bot\n\n"
-        "🛡️ **Admin Commands**\n"
+        "👑 **Admin Commands**\n"
         "├• `/upload` — Upload a file (reply to file)\n"
         "├• `/auto_del` — Set auto-delete time\n"
         "├• `/stats` — View bot statistics\n"
