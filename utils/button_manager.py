@@ -32,7 +32,7 @@ class ButtonManager:
                         return False
             return True
         except Exception as e:
-            logger.error(f"Force sub check error for user {user_id}: {e}")
+            logger.error(f"Force sub check error for user {user_id}: {str(e).encode('utf-8', 'ignore').decode('utf-8')}")
             return False
 
     async def show_start(self, client, callback_query: CallbackQuery):
@@ -42,7 +42,7 @@ class ButtonManager:
                 user_mention=callback_query.from_user.mention
             ))
 
-            if callback_query.message.caption == caption:
+            if callback_query.message.caption and callback_query.message.caption == caption:
                 logger.warning(f"Start message not modified for user {callback_query.from_user.id} to avoid Telegram error.")
                 return
 
@@ -54,13 +54,13 @@ class ButtonManager:
                 reply_markup=self.start_button()
             )
         except Exception as e:
-            logger.error(f"Show start error for user {callback_query.from_user.id}: {e}")
+            logger.error(f"Show start error for user {callback_query.from_user.id}: {str(e).encode('utf-8', 'ignore').decode('utf-8')}")
 
     async def show_help(self, client, callback_query: CallbackQuery):
         try:
             help_text = remove_surrogates(config.Messages.HELP_TEXT)
 
-            if callback_query.message.text == help_text:
+            if callback_query.message.text and callback_query.message.text == help_text:
                 logger.warning(f"Help message not modified for user {callback_query.from_user.id} to avoid Telegram error.")
                 return
 
@@ -69,7 +69,7 @@ class ButtonManager:
                 reply_markup=self.help_button()
             )
         except Exception as e:
-            logger.error(f"Show help error for user {callback_query.from_user.id}: {e}")
+            logger.error(f"Show help error for user {callback_query.from_user.id}: {str(e).encode('utf-8', 'ignore').decode('utf-8')}")
 
     async def show_about(self, client, callback_query: CallbackQuery):
         try:
@@ -78,7 +78,7 @@ class ButtonManager:
                 version=config.BOT_VERSION
             ))
 
-            if callback_query.message.text == about_text:
+            if callback_query.message.text and callback_query.message.text == about_text:
                 logger.warning(f"About message not modified for user {callback_query.from_user.id} to avoid Telegram error.")
                 return
 
@@ -87,7 +87,7 @@ class ButtonManager:
                 reply_markup=self.about_button()
             )
         except Exception as e:
-            logger.error(f"Show about error for user {callback_query.from_user.id}: {e}")
+            logger.error(f"Show about error for user {callback_query.from_user.id}: {str(e).encode('utf-8', 'ignore').decode('utf-8')}")
 
     def _channel_buttons(self) -> List[InlineKeyboardButton]:
         if config.CHANNEL_LINK and config.CHANNEL_LINK_2:
