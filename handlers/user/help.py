@@ -16,7 +16,7 @@ async def help_command(client: Client, message: Message):
         "├• `/start` — Start the bot\n"
         "├• `/help` — Show this help message\n"
         "└• `/about` — About the bot\n\n"
-        "👑 **Admin Commands**\n"
+        "🛡️ **Admin Commands**\n"
         "├• `/upload` — Upload a file (reply to file)\n"
         "├• `/auto_del` — Set auto-delete time\n"
         "├• `/stats` — View bot statistics\n"
