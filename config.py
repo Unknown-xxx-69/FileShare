@@ -130,31 +130,29 @@ Use /help to see available commands!
 """
 
     HELP_TEXT = """
-📚 **Available Commands**  
+📚 **Available Commands**
 
-👤 **User Commands:**  
-• `/start` - Start the bot  
-• `/help` - Show this menu  
-• `/about` - Bot details  
-• `/short [url]` - Shorten a link (e.g., `/short example.com`)
+👥 **User Commands:**  
+• `/start` – Start the bot  
+• `/help` – Show this help menu  
+• `/about` – Get bot details  
+• `/short [url]` – Shorten a link (e.g., `/short example.com`)
 
 👑 **Admin Commands:**  
-• `/upload` - Upload a file (reply to a file)  
-• `/stats` - View bot statistics  
-• `/bcast` - Send a message to all users  
-• `/auto_del` - Set auto-delete timer  
+• `/upload` – Upload a file (reply to a file)  
+• `/stats` – View bot statistics  
+• `/bcast` – Broadcast a message to all users  
+• `/auto_del` – Set auto-delete timer  
 
+🗑️ **Auto-Delete System:**  
+• Files are auto-deleted after a set time  
+• Use `/auto_del` to modify the timer  
 
-🗑 **Auto-Delete System:**  
-• Files auto-delete after a set time.  
-• Modify timer using `/auto_del`.  
+📦 **Batch System:**  
+• `/batch` – Group files into one link  
+• Forward files, then reply with `/batch`
 
-🔗 **Batch System:**  
-• `/batch` - Group multiple files into one link.  
-• Forward files & reply with `/batch`.  
-
-
-⚠️ **Need Help?** Contact [@Priyaverma2004](https://t.me/Priyaverma2004?text=Hello+😊)  
+❓ **Need Help?** Contact [@Priyaverma2004](https://t.me/Priyaverma2004?text=Hello+😊)
 """
 
     ABOUT_TEXT = """
