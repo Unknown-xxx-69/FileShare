@@ -9,9 +9,9 @@ logger = logging.getLogger(__name__)
 
 # Validate API key on load
 if not getattr(config, "LS_API_KEY", "").strip():
-    raise ValueError("❌ InshortURL API key (LS_API_KEY) is missing in config.py.")
+    raise ValueError("❌ AroLinks API key (LS_API_KEY) is missing in config.py.")
 
-INSHORT_API_URL = "https://inshorturl.com/api"
+AROLINKS_API_URL = "https://arolinks.com/api"
 URL_PATTERN = re.compile(r'^https?://[^\s]+$')
 
 
@@ -19,7 +19,7 @@ URL_PATTERN = re.compile(r'^https?://[^\s]+$')
 async def short_url_command(client: Client, message: Message):
     """
     Command: /short <url>
-    Description: Shortens a URL using the InshortURL API.
+    Description: Shortens a URL using the AroLinks API.
     Only accessible by admin users defined in config.ADMIN_IDS.
     """
     try:
@@ -50,7 +50,7 @@ async def short_url_command(client: Client, message: Message):
         }
 
         async with httpx.AsyncClient() as client_http:
-            response = await client_http.get(INSHORT_API_URL, params=params)
+            response = await client_http.get(AROLINKS_API_URL, params=params)
             response.raise_for_status()
             data = response.json()  # ✅ FIXED: removed await
 
