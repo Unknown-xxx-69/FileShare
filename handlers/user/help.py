@@ -7,31 +7,31 @@ button_manager = ButtonManager()
 @Client.on_message(filters.command("help"))
 async def help_command(client: Client, message: Message):
     help_text = (
-        "<b>📚 Bot Commands & Usage</b>\n\n"
-        "<i>Here are the available commands:</i>\n\n"
+        "**📚 Bot Commands & Usage**\n\n"
+        "_Here are the available commands:_\n\n"
         
-        "<b>👤 User Commands:</b>\n"
+        "**👤 User Commands:**\n"
         "• /start - Start the bot\n"
         "• /help - Show this help message\n"
         "• /about - About the bot\n\n"
         
-        "<b>👮 Admin Commands:</b>\n"
+        "**👮 Admin Commands:**\n"
         "• /upload - Upload a file (reply to a file)\n"
         "• /auto_del - Set auto-delete time\n"
         "• /stats - View bot statistics\n"
         "• /bcast - Broadcast message to users\n\n"
 
-        "<b>🗑️ Auto-Delete Feature:</b>\n"
+        "**🗑️ Auto-Delete Feature:**\n"
         "Files are automatically deleted after the set time.\n"
         "Use /auto_del to change the deletion time.\n\n"
         
-        "<b>🔗 Link Shortener:</b>\n"
+        "**🔗 Link Shortener:**\n"
         "Use /short to shorten any URL.\n"
-        "<i>Example:</i> /short https://example.com"
+        "_Example:_ /short https://example.com"
     )
 
     await message.reply_text(
         help_text,
         reply_markup=button_manager.help_button(),
-        parse_mode="html"
+        parse_mode="markdown"
     )
